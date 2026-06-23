@@ -1,0 +1,5 @@
+interface:
+  display_name: "Grammar Mentor"
+  short_description: "English grammar check and sentence structure analysis"
+  brand_color: "#10B981"
+  default_prompt: "Use $grammar-mentor to analyze this English sentence for grammar and sentence structure."

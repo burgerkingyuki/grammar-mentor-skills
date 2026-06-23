@@ -1,0 +1,13 @@
+﻿# OS
+Thumbs.db
+.DS_Store
+
+# Editor
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Codex
+.codex/
+.agents/
