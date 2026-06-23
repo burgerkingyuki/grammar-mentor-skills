@@ -171,6 +171,7 @@
    - 个人注意：作主语时不可省略——`The book that is on the desk is mine.`（that 不可省）
 4. 限定性 vs. 非限定性：`My mother who is 60`（限定，可能有多个母亲）vs. `My mother, who is 60,`（非限定，只有一个母亲）
 5. that vs. which：非限定性从句不用 that，介词后不用 that
+6. way 作先行词时：关系词 in which / that 常省略，在从句中充当方式状语（非主语/宾语）。`the way (in which) she speaks` → 还原：she speaks in this way
 
 **示例：**
 - ✅ 可省略：The book (that) I read was great.（that 作 read 的宾语）

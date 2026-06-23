@@ -466,3 +466,112 @@ The company launched a new product last month. It is very popular among young co
 
 **【段落主干总结】**
 → 过去事件（句① launch）→ 当前状态（句② popular）→ 当前行动（句③ promote），时态切换合理，代词指代链清晰。
+
+---
+
+## 示例五：从句连接词归一化（📐 还原）
+
+**用户输入：**
+```
+The book that I bought is better than the one she recommended.
+```
+
+---
+
+**【1. 语法错误排查】**
+
+该句语法完全正确，无任何错误。
+
+---
+
+**【2. 句子整体结构判定】**
+
+- 句型类别：**主从复合句**（含两个定语从句）
+- 主句：**SVP**（The book + is + better + than 比较状语从句）
+- 定语从句 ①：that I bought（修饰 the book — 关系代词作宾语）
+- 定语从句 ②：she recommended（修饰 the one — 关系代词作宾语且省略）
+
+---
+
+**【3. 逐层成分拆解（统一呈现）**
+
+```
+[The book that I bought is better than the one she recommended.]
+   │
+   ├── 主语（Subject）：The book
+   │     │
+   │     └── 后置定语（Attributive — 定语从句 ①）：that I bought
+   │           │
+   │           ├── 关系代词（Relative Pronoun — 作 bought 的宾语）：that
+   │           │     📐 还原：I bought that（that 作 bought 的宾语，还原到动词后）
+   │           │     📚 知识点：[CX-02 定语从句]：关系代词 that 代替先行词 the book，在从句中作宾语
+   │           │     📚 知识点：[T-05 定语从句关系代词省略]：此处 that 可省略（作宾语）但未省略
+   │           │
+   │           └── [定语从句内部]
+   │                 ├── 主语：I
+   │                 └── 谓语：bought（及物动词，一般过去时；that 为其宾语）
+   │
+   ├── 谓语动词（Predicate Verb — 系动词）：is
+   │
+   ├── 表语（Predicative）：better
+   │     📚 知识点：[T-01 系动词后接表语，不是宾语]：is + better（形容词表语 → SVP）
+   │
+   └── 比较状语从句（Comparative Adverbial Clause）：than the one she recommended
+         │
+         ├── 连词（Conjunction）：than
+         │
+         └── 比较对象：the one she recommended
+               │
+               ├── 中心代词：one（= the book）
+               │
+               └── 定语从句 ②：she recommended（省略了关系代词 that/which）
+                     │
+                     ├── 省略的关系代词：∅（= that/which，作 recommended 的宾语）
+                     │     📐 还原：she recommended that（that 作 recommended 的宾语）
+                     │     📚 知识点：[T-05 定语从句关系代词省略]：作宾语时省略（细节知识点1）
+                     │
+                     └── [定语从句内部]
+                           ├── 主语：she
+                           └── 谓语：recommended（一般过去时；省略的 that 为其宾语）
+```
+
+**对比两个定语从句的连接词：**
+
+| 从句 | 连接词 | 作什么成分 | 📐 还原 | 是否省略 |
+|------|--------|-----------|---------|---------|
+| that I bought | that | bought 的宾语 | I bought that | 否（显式保留） |
+| she recommended | ∅ (that/which) | recommended 的宾语 | she recommended that | 是（已省略） |
+
+---
+
+**【4. 确认摘要】**
+
+```
+📚 知识复现：3 项
+   ✅ [CX-02 定语从句]：两个定语从句，关系代词作宾语
+   ✅ [T-05 定语从句关系代词省略]：she recommended 中 that 已省略
+   ✅ [T-01 系动词后接表语]：is better → SVP
+
+⚠️ 偏差预警：0 项
+🟢 未触发：#001、#002、#003、#004
+❌ 知识违反：0 项
+```
+
+---
+
+**【全句主干总结】**
+→ The book（+ 定语从句 ① that I bought）+ is + better + than the one（+ 定语从句 ② ∅ she recommended）→ **SVP**。
+
+---
+
+## 📐 归一化速查
+
+| 从句类型 | 连接词 | 还原 |
+|---------|--------|------|
+| 定语从句（宾） | The book that I bought | I bought **that** |
+| 定语从句（主） | The man who spoke | 无需还原（who 即主语） |
+| 定语从句（状） | The way consumers approach | consumers approach **in this way** |
+| 定语从句（定） | The man whose car... | **his** car... |
+| 宾语从句（纯连词） | I know that he is right | that 不作成分 |
+| 主语从句（宾） | What she said is true | she said **what** |
+| 表语从句（纯连词） | The truth is that he left | that 不作成分 |

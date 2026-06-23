@@ -107,6 +107,33 @@ Check: tense, subject-verb agreement, articles, preposition collocation, singula
          └────────────┘
 ```
 
+
+**Clause connective analysis and 📐 normalization:** For every clause (attributive / nominal / adverbial), analyze the connective word''s role and show the restored normal word order:
+
+| Connective role | Action | Example |
+|----------------|--------|---------|
+| 作宾语（关系代词） | 还原宾语到动词后 | `the book (that) I bought` → 📐 还原：I bought that（that 作 bought 的宾语） |
+| 作主语（关系代词） | 标注即可，无需还原 | `the man who spoke` → 📐 who 作从句主语，已为正常语序 |
+| 作状语（关系副词） | 还原为介词短语/副词 | `the way (that) consumers approach` → 📐 还原：consumers approach in this way（that/in which 作方式状语） |
+| 作定语（关系代词 whose） | 还原为所有格 | `the man whose car was stolen` → 📐 还原：his car was stolen（whose 作 car 的定语） |
+| 纯连词（不作成分） | 明确标注"不作成分" | `I know that he is right.` → 📐 that 为纯连词，仅引导从句，在从句中不作任何成分 |
+| 作表语（关系代词） | 还原表语到系动词后 | `the hero that he became` → 📐 还原：he became that（that 作 became 的表语） |
+
+For every clause node in the tree, add a `📐 还原` annotation immediately after the connective word line:
+
+```
+├── 定语从句：that I bought
+│     📐 还原：I bought that（that 作 bought 的宾语）
+│
+├── 宾语从句：that he is right
+│     📐 that 为纯连词，在从句中不作任何成分
+│
+├── 主语从句：What she said
+│     📐 还原：she said what（what 作 said 的宾语）
+```
+
+This helps the user understand the underlying structure by seeing where the moved/omitted element belongs.
+
 ### Panel 4: Confirmation Summary
 
 After Panel 3, output a compact checklist confirming what was triggered:
