@@ -575,3 +575,91 @@ The book that I bought is better than the one she recommended.
 | 宾语从句（纯连词） | I know that he is right | that 不作成分 |
 | 主语从句（宾） | What she said is true | she said **what** |
 | 表语从句（纯连词） | The truth is that he left | that 不作成分 |
+
+---
+
+## 示例六：长难句拆解（Split & Simplify）
+
+**用户输入：**
+```
+In those far-off days, it was taken for granted that the critics of major papers would write in detail and at length about the events they covered.
+```
+
+---
+
+*(Panel 1-3 省略，此处仅展示 Panel 3B)*
+
+---
+
+**【3B-1 断开】拆分为 4 个简单句**
+
+```
+原句：In those far-off days, it was taken for granted that the critics of major papers
+      would write in detail and at length about the events they covered.
+
+① [People] took it for granted that [critics would write about the events].
+   ← 主句还原为主动语态 SVOC（took + it + for granted + that 宾语从句）
+   ← 补回隐含主语 People
+
+② Critics would write in detail and at length about the events.
+   ← that 主语从句（外置的真正主语），that 仅连接不作成分，已剥离
+
+③ The critics were of major papers.
+   ← 还原 of major papers 为独立系表句，展示后置定语的内在含义
+
+④ [The critics] covered the events.
+   ← 定语从句 they covered，省略的关系代词 that/which 已还原为宾语
+```
+
+---
+
+**【3B-2 简化】去扩展，留核心**
+
+```
+① 原简单句：[People] took it for granted that [critics would write about the events].
+   ──→ 核心：People + took + it + for granted → SVOC
+   去掉：~~that 宾语从句~~（简化视角视为扩展）
+
+② 原简单句：Critics would write in detail and at length about the events.
+   ──→ 核心：Critics + would write → SV
+   去掉：~~in detail and at length~~（方式状语）、~~about the events~~（关于状语）
+
+③ 原简单句：The critics were of major papers.
+   ──→ 核心：Critics + were + of major papers → SVP
+   无扩展成分可去（of major papers 为表语核心）
+
+④ 原简单句：[The critics] covered the events.
+   ──→ 核心：Critics + covered + events → SVO
+   无扩展成分可去
+```
+
+**整句核心骨架一览：**
+
+| 层 | 核心 | 句型 |
+|----|------|------|
+| 主句（还原主动） | People took it for granted | SVOC |
+| 主语从句 | Critics would write | SV |
+| of 定语还原 | Critics were of papers | SVP |
+| 定语从句 | Critics covered events | SVO |
+
+> 💡 一个 43 词的长难句，核心其实是四件事：某人认为某事理所当然 → 评论家会写 → 评论家属于大报社 → 评论家报道事件。
+
+---
+
+## 拆分 & 简化规则速查
+
+| 步骤 | 做什么 | 不做什么 |
+|------|--------|---------|
+| **3B-1 断开** | 拆成独立简单句；还原省略成分用 `[...]` | 不保留从句嵌套结构 |
+| **3B-2 简化** | 保留主/谓/宾/表/补；去掉定/状/同位/插入 | 不改变核心成分的语法功能 |
+
+**去掉什么（非核心）：**
+- 定语：形容词、介词短语后置定语、定语从句、过去/现在分词定语
+- 状语：时间/地点/方式/原因/目的/条件/让步等
+- 同位语
+- 插入语
+
+**保留什么（核心）：**
+- 主语 + 谓语动词 + 宾语/表语/宾补/间接宾语
+- 否定词（not/never）— 属于谓语的一部分
+- 情态动词 — 属于谓语的一部分

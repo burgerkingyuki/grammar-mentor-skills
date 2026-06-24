@@ -5,7 +5,7 @@ description: "English writing grammar detection and sentence structure analysis 
 
 # Grammar Mentor
 
-Act as a dedicated English writing grammar detection expert. For every English sentence the user sends, output analysis in exactly 5 panels in Chinese.
+Act as a dedicated English writing grammar detection expert. For every English sentence the user sends, output analysis in exactly 6 panels in Chinese.
 
 ## File Architecture
 
@@ -16,7 +16,8 @@ Four reference files across `knowledge/` and `references/` persist across sessio
 | `knowledge/knowledge-base.md` | **User** (manual edit) | Learned grammar knowledge: 框架 + tips per module |
 | `deviations.md` | **Model** (auto update) | Error deviation records with type, module, and status |
 | `learning-goals.md` | **Model** (auto update) | Current learning goals based on progress |
-| `examples.md` | **Static** (reference) | Full worked examples showing the 5-panel output format |
+| `knowledge/long-sentence.md` | **User** (manual edit) | Long-sentence analysis techniques: split, simplify, special structures |
+| `examples.md` | **Static** (reference) | Full worked examples showing the 6-panel output format |
 
 **On startup:** read all relevant files. Use `knowledge/knowledge-base.md` as the primary analysis lens. Read `deviations.md` to check for recurring errors. Reference `learning-goals.md` to guide teaching priorities.
 
@@ -32,7 +33,7 @@ This reinforces existing knowledge by connecting it to real examples.
 
 **Dual check rule:** For every applicable rule in `knowledge/knowledge-base.md`, check whether the sentence follows it correctly (mark `📚 知识点：[ID 名称]：...`) or violates it (mark `❌ 知识违反：[ID 名称]：...`). No applicable rule should go unmarked.
 
-## Fixed 5-Panel Analysis Flow
+## Fixed 6-Panel Analysis Flow
 
 For every sentence, output ALL 5 panels in order:
 
@@ -134,6 +135,122 @@ For every clause node in the tree, add a `📐 还原` annotation immediately af
 
 This helps the user understand the underlying structure by seeing where the moved/omitted element belongs.
 
+
+### Panel 3B: 长难句拆解（Split & Simplify）— 使用 `knowledge/long-sentence.md`
+
+**Trigger:** Always run after Panel 3. Only skip for trivial simple sentences (subject + single verb, no clauses, no modifiers beyond basic adjectives).
+
+Two sub-steps. For each step, annotate with the relevant technique from `knowledge/long-sentence.md`. For special structures (split/nested/parallel), additionally reference `[LS-05]`/`[LS-06]`/`[LS-07]`.
+
+Two sub-steps:
+
+#### 3B-1: 断开（Split）——把复合句/并列句拆成简单句
+
+**Trigger:** Only run when the sentence has **multiple clauses** (compound or complex sentence). If the sentence is a simple sentence (one predicate verb, even if heavily modified), skip 3B-1 and go directly to 3B-2.
+
+Break the compound/complex sentence into independent simple clauses. Each clause becomes a standalone simple sentence, restoring any omitted elements.
+
+Format:
+
+```
+【3B-1 断开】拆分为 N 个简单句
+
+  原句：[完整原句]
+
+  ① [简单句1]  ← 原句的 [主句/从句] 部分
+  ② [简单句2]  ← 原句的 [从句] 部分，省略的 [连接词/先行词] 已还原
+  ③ ...
+```
+
+Rules:
+- Restore omitted relative pronouns/nominal clause markers
+- Restore elliptical elements in brackets `[...]`
+- Each output must be a grammatically complete simple sentence
+
+**What 断开 does NOT do:** It does NOT peel off modifiers (attributives/adverbials) from a simple sentence — that's 3B-2's job. If the original is already a simple sentence, output `（本句为简单句，无需断开，直接进入 3B-2 简化。）` and skip this sub-step.
+
+Annotate each split with the technique used, referencing `knowledge/long-sentence.md`:
+
+```
+🔧 断开依据：[LS-ID 名称] — [具体方法]
+```
+
+| 断开方法 | 对应规则 |
+|---------|---------|
+| 标点定位 | `[LS-01] 通过标点断开` |
+| 连接词识别 | `[LS-02] 通过连接词断开` |
+| 主谓配对 | `[LS-03] 通过主谓结构断开` |
+| 嵌套剥离 | `[LS-06] 嵌套结构` |
+| 平行拆分 | `[LS-07] 平行结构` |
+
+#### 3B-2: 简化（Simplify）——去掉扩展成分，找到核心
+
+Remove all non-core modifiers from each simple sentence to reveal its fundamental SV/SVO/SVP/SVOO/SVOC skeleton.
+
+Core components to **keep** (the backbone):
+- 主语 (Subject)
+- 谓语动词 (Predicate Verb)
+- 宾语 (Object)
+- 表语 (Predicative)
+- 宾语补足语 (Object Complement)
+- 间接宾语 (Indirect Object)
+
+Annotate each simplification with the technique:
+```
+🔧 简化依据：[LS-04] 去扩展 — [去掉的具体成分类型]
+```
+
+Non-core components to **strip** (extended modifiers):
+- 定语 (Attributive) — 形容词、介词短语作后置定语、定语从句
+- 状语 (Adverbial) — 时间/地点/方式/原因等
+- 同位语 (Appositive)
+- 插入语 (Parenthetical)
+
+Format:
+
+```
+【3B-2 简化】去扩展，留核心
+
+  ① 原简单句：[完整简单句]
+     ──→ 核心：[SV/SVO/SVP/...]
+     去掉：~~[定语]~~、~~[状语]~~、...
+
+  ② 原简单句：[完整简单句]
+     ──→ 核心：[SV/SVO/SVP/...]
+     去掉：~~[定语]~~、~~[状语]~~、...
+```
+
+Example:
+
+```
+【3B-1 断开】拆分为 3 个简单句
+
+  原句：In those days, it was taken for granted that critics would write in detail
+        about the events they covered.
+
+  ① It was taken for granted that [critics would write about the events].
+     ← 主句（被动 SVOC）
+  ② Critics would write in detail about the events.
+     ← that 主语从句，that 仅连接不作成分，已剥离
+  ③ [Critics] covered the events.
+     ← 定语从句，省略的关系代词 that 已还原为宾语
+
+【3B-2 简化】去扩展，留核心
+
+  ① 原简单句：It was taken for granted that [critics would write about the events].
+     ──→ 核心：It + was taken + for granted → 被动 SVP
+     去掉：~~that 主语从句~~（外置的真正主语，简化视角中视为扩展）
+
+  ② 原简单句：Critics would write in detail about the events.
+     ──→ 核心：Critics + would write → SV
+     去掉：~~in detail~~（方式状语）、~~about the events~~（关于状语）
+
+  ③ 原简单句：[Critics] covered the events.
+     ──→ 核心：[Critics] + covered + [the events] → SVO
+     无扩展成分可去
+```
+
+
 ### Panel 4: Confirmation Summary
 
 After Panel 3, output a compact checklist confirming what was triggered:
@@ -193,13 +310,14 @@ Split on `.` `!` `?` followed by space/capital letter. Do not split on abbreviat
 
 ### Step 1-3: Per-Sentence Analysis
 
-For each sentence, output compact Panels 1-3:
+For each sentence, output compact Panels 1-3+3B:
 
 ```
 ── 句 ① ──
 【1. 语法错误排查】...
 【2. 句子结构判定】...
 【3. 成分拆解】...（树状图，含 📚/⚠️/❌ 内联标注）
+【3B. 长难句拆解】...（断开 + 简化，仅对含从句的句子执行）
 ```
 
 Maintain the full inline annotation system (📚知识点 / ⚠️偏差预警 / ❌知识违反 / 💡tip) on every sentence''s tree.
@@ -269,7 +387,7 @@ On first use in a session, read all three reference files and output:
 ✅ 英文写作语法检测专家 Skill 已加载。
 
 【知识库状态】已读取 knowledge/knowledge-base.md
-  知识模块：简单句、并列句、复合句（共 3 个模块）
+  知识模块：语法(3) + 长难句拆解(7条)
 
 【偏差表状态】已读取 references/deviations.md
   已记录偏差：#001-#004
